@@ -1,0 +1,81 @@
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-primary-normal{
+  color: black !important;
+  background-color: #bdc3c7 !important;
+}
+
+.btn-primary-fire {
+  background-color: #EE8130 !important
+}
+
+.btn-primary-fairy {
+  background-color: #9b59b6
+}
+
+.btn-primary-grass {
+  background-color: #7AC74C
+}
+
+.btn-primary-electric {
+  background-color: #F7D02C
+}
+
+.btn-primary-ice {
+  background-color: #96D9D6
+}
+
+.btn-primary-fighting {
+  background-color: #C22E28
+}
+
+.btn-primary-poison {
+  background-color: #A33EA1
+}
+
+.btm-primary-ground {
+  background-color: #E2BF65
+}
+
+.btn-primary-flying {
+  background-color: #A98FF3
+}
