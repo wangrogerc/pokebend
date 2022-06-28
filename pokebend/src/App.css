@@ -48,8 +48,8 @@
   background-color: #EE8130 !important
 }
 
-.btn-primary-fairy {
-  background-color: #9b59b6
+.btn-primary-water {
+  background-color: #6390F0
 }
 
 .btn-primary-grass {
@@ -78,4 +78,36 @@
 
 .btn-primary-flying {
   background-color: #A98FF3
+}
+
+.btn-primary-psychic {
+  background-color: #F95587
+}
+
+.btn-primary-bug {
+  background-color: #A6B91A
+}
+
+.btn-primary-rock {
+  background-color: #B6A136
+}
+
+.btn-primary-ghost {
+  background-color: #735797
+}
+
+.btn-primary-dragon {
+  background-color: #6F35FC
+}
+
+.btn-primary-dark {
+  background-color: #705746
+}
+
+.btn-primary-steel {
+  background-color: #B7B7CE
+}
+
+.btn-primary-fairy {
+  background-color: #D685AD
 }

@@ -5,9 +5,26 @@ export default function MainGame(){
     const [currentPokemon, setCurrentPokemon] = useState()
     const [currentPokemonPic, setCurrentPokemonPic] = useState()
     const [currentPokemonTypes, setCurrentPokemonTypes] = useState([])
-    const [ElementBend, setElementBend] = useState()
+    const [elementBend, setElementBend] = useState()
     const [currentPokemonVulernabilities, setCurrentPokemonVulnerabilities] = useState([])
     const [currentVulNames, setcurrentVulNames] = useState([])
+    const [normalAmmo, setNormalAmmo] = useState(1)
+    const [fireAmmo, setFireAmmo] = useState(1)
+    const [waterAmmo, setWaterAmmo] = useState(1)
+    const [grassAmmo, setGrassAmmo] = useState(1)
+    const [electricAmmo, setElectricAmmo] = useState(1)
+    const [iceAmmo, setIceAmmo] = useState(1)
+    const [fightingAmmo, setFightingAmmo] = useState(1)
+    const [poisonAmmo, setPoisonAmmo] = useState(1)
+    const [groundAmmo, setGroundAmmo] = useState(1)
+    const [flyingAmmo, setFlyingAmmo] = useState(1)
+    const [psychicAmmo, setPsychicAmmo] = useState(1)
+    const [bugAmmo, setBugAmmo] = useState(1)
+    const [rockAmmo, setRockAmmo] = useState(1)
+    const [ghostAmmo, setGhostAmmo] = useState(1)
+    const [darkAmmo, setDarkAmmo] = useState(1)
+    const [steelAmmo, setSteelAmmo] = useState(1)
+    const [fairyAmmo, setFairyAmmo] = useState(1)
     function getRandomNumber(min, max) {
         return Math.random() * (max - min) + min;
       }
@@ -33,7 +50,10 @@ export default function MainGame(){
     useEffect(()=>{
         if (currentPokemon != undefined){
             setCurrentPokemonPic(currentPokemon.sprites.front_default);
-            setCurrentPokemonTypes(currentPokemon.types)    
+            setCurrentPokemonTypes(currentPokemon.types) 
+            if(elementBend != undefined){
+
+            }
         }
 
     }, [currentPokemon])
@@ -55,33 +75,18 @@ export default function MainGame(){
             .then(data =>
                 data.flatMap(type => type.damage_relations.double_damage_from)
                     .map(weakness => weakness.name))
-            .then(setCurrentPokemonVulnerabilities)
+            .then(setCurrentPokemonVulnerabilities);
             
-        // for (const type of currentPokemonTypes){
-        //     // console.log(type.type.name);
-        //     fetch(`https://pokeapi.co/api/v2/type/${type.type.name}`)
-        //     .then(response => response.json())
-        //     // .then(response => console.log(response.damage_relations.double_damage_from))
-        //     .then(response => arrayOfArraysOfObjects.push(response.damage_relations.double_damage_from))
-            
-            
-        // }
-        // // setCurrentPokemonVulnerabilities(arrayOfArraysOfObjects)
-        // const temp = []
-        // // console.log(arrayOfArraysOfObjects)
-        // // console.log(Array.isArray(arrayOfArraysOfObjects))
-        // for (const arrayOfObjects of arrayOfArraysOfObjects){
-        //     console.log("anything")
-        //     console.log(arrayOfObjects)
-        //     for (const anObject of arrayOfObjects){
-        //         console.log(anObject.name)
-        //     }
-        // }
-        // console.log(temp)
     
         
     }, [currentPokemonTypes])
 
+    useEffect(()=> {
+        return bendInteraction()
+
+        
+    }, [elementBend]
+    )
 
     function setRandomPokemon(){
         const number = Math.floor(getRandomNumber(1,151))
@@ -94,59 +99,156 @@ export default function MainGame(){
     // function bend(){
     //     if (setElementBend in currentPokemonVulernabilities)
     // }
+
+    function bendInteraction(){
+        console.log(elementBend)
+        console.log(currentPokemonVulernabilities)
+        console.log(currentPokemonTypes)
+        if (currentPokemonVulernabilities.includes(elementBend)){
+            console.log("bend inter")
+            currentPokemonTypes.forEach((type) =>{
+                console.log(type.type.name);
+                if (type == "normal"){
+                    console.log("plus normal")
+                    setNormalAmmo(normalAmmo+1)
+                }
+                if (type.type.name == "fire"){
+                    console.log("plus flames")
+                    setFireAmmo(fireAmmo+1)
+                }
+                if (type == "water"){
+                    setWaterAmmo(waterAmmo+1)
+                }
+                if (type.type.name == "grass"){
+                    console.log("good grass")
+                    setGrassAmmo(grassAmmo+1)
+                }
+                if (type == "electric"){
+                    setElectricAmmo(electricAmmo+1)
+                }
+                if (type == "ice"){
+                    setIceAmmo(iceAmmo+1)
+                }
+                if (type == "fighting"){
+                    setFightingAmmo(fightingAmmo+1)
+                }
+                if (type == "poison"){
+                    setPoisonAmmo(poisonAmmo+1)
+                }
+                if (type == "ground"){
+                    setGroundAmmo(groundAmmo+1)
+                }
+            })
+            }
+    }
+
     function normalBend(){
-        setElementBend("normal")
+        if (normalAmmo > 0){
+            setNormalAmmo(normalAmmo-1)
+            setElementBend("normal")
+        }
     }
     function fireBend(){
-        setElementBend("fire")
+        if (fireAmmo > 0){
+            setFireAmmo(fireAmmo-1)
+            setElementBend("fire")
+        }
     }
     function waterBend(){
-        setElementBend("water")
+        if (waterAmmo > 0){
+            setWaterAmmo(waterAmmo -1)
+            setElementBend("water")
+        }
     }
     function grassBend(){
-        setElementBend("grass")
+        if (grassAmmo > 0){
+            setGrassAmmo(grassAmmo-1)
+            setElementBend("grass")
+        }
     }
     function electricBend(){
-        setElementBend("electric")
+        if (electricAmmo > 0){
+            setElectricAmmo(electricAmmo -1)
+            setElementBend("electric")
+        }
     }
     function iceBend(){
-        setElementBend("ice")
+        if (iceAmmo > 0){
+            setIceAmmo(iceAmmo-1)
+            setElementBend("ice")
+        }
     }
     function fightingBend(){
-        setElementBend("fighting")
+        if (fightingAmmo > 0){
+            setFightingAmmo(fightingAmmo-1)
+            setElementBend("fighting")
+        }
     }
     function poisonBend(){
-        setElementBend("poison")
+        if (poisonAmmo > 0){
+            setPoisonAmmo(poisonAmmo-1)
+            setElementBend("poison")
+        }
     }
     function groundBend(){
-        setElementBend("ground")
+        if (groundAmmo > 0){
+            setGroundAmmo(groundAmmo-1)
+            setElementBend("ground")
+        }
     }
     function flyingBend(){
+        if (flyingAmmo > 0){
+        setFlyingAmmo(flyingAmmo-1)
         setElementBend("flying")
+        }
     }
     function psychicBend(){
-        setElementBend("psychic")
+        if (psychicAmmo > 0){
+            setPsychicAmmo(psychicAmmo-1)
+            setElementBend("psychic")
+        }
     }
     function bugBend(){
-        setElementBend("bug")
+        if (bugAmmo > 0){
+            setBugAmmo(bugAmmo-1)
+            setElementBend("bug")
+        }        
     }
     function rockBend(){
-        setElementBend("rock")
+        if (rockBend > 0){
+            setRockAmmo(rockAmmo-1)
+            setElementBend("rock")
+        }
     }
     function ghostBend(){
-        setElementBend("ghost")
+        if (ghostBend > 0){
+            setGhostAmmo(ghostAmmo-1)
+            setElementBend("ghost")
+        }
     }
     function darkBend(){
-        setElementBend("dark")
+        if (darkBend > 0){
+            setDarkAmmo(darkAmmo-1)
+            setElementBend("dark")
+        }
     }
     function dragonBend(){
-        setElementBend("dragon")
+        if (dragonAmmo > 0){
+            setDragonAmmo(dragonAmmo-1)
+            setElementBend("dragon")
+        }
     }
     function steelBend(){
-        setElementBend("steel")
+        if (steelAmmo > 0){
+            setSteelAmmo(darkAmmo-1)
+            setElementBend("steel")
+        }
     }
     function fariyBend(){
-        setElementBend("fairy")
+        if (fairyAmmo > 0){
+            setFairyAmmo(fairyAmmo-1)
+            setElementBend("fairy")
+        }
     }
     
     return (
@@ -157,20 +259,25 @@ export default function MainGame(){
             )
         })}
         <img src = {currentPokemonPic}/>
-        
-        <button type="button" className="btn btn-primary btn-primary-normal" onClick = {setRandomPokemon}>Normal</button>
         <button type="button" className="btn btn-primary" onClick = {setRandomPokemon}>Reroll</button>
-        <button type="button" className="btn btn-primary" onClick = {() => {waterBend(); setRandomPokemon()}}>Water</button>
+        <button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend(); setRandomPokemon()}}>Normal</button>
+        <button type="button" className="btn btn-primary btn-primary-water" onClick = {() => {waterBend(); setRandomPokemon()}}>Water</button>
         <button type="button" className="btn btn-primary btn-primary-fire" onClick = {() => {fireBend(); setRandomPokemon();}}>Fire</button>
         <button type="button" className="btn btn-primary btn-primary-grass" onClick = {() => {grassBend(); setRandomPokemon();}}>Grass</button>
         <button type="button" className="btn btn-primary btn-primary-electric" onClick = {() => {electricBend(); setRandomPokemon();}}>Electric</button>
         <button type="button" className="btn btn-primary btn-primary-ice" onClick = {() => {iceBend(); setRandomPokemon();}}>Ice</button>
-        <button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend(); setRandomPokemon();}}>Ice</button>
+        <button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend(); setRandomPokemon();}}>Fighting</button>
         <button type="button" className="btn btn-primary btn-primary-poison" onClick = {() => {poisonBend(); setRandomPokemon();}}>Poison</button>
         <button type="button" className="btn btn-primary btn-primary-ground" onClick = {() => {groundBend(); setRandomPokemon();}}>Ground</button>
-        <button type="button" className="btn btn-primary btn-primary-flying" onClick = {() => {flyingBend(); setRandomPokemon();}}>Ground</button>
-
-
+        <button type="button" className="btn btn-primary btn-primary-flying" onClick = {() => {flyingBend(); setRandomPokemon();}}>Flying</button>
+        <button type="button" className="btn btn-primary btn-primary-psychic" onClick = {() => {psychicBend(); setRandomPokemon();}}>Psychic</button>
+        <button type="button" className="btn btn-primary btn-primary-bug" onClick = {() => {bugBend(); setRandomPokemon();}}>Bug</button>
+        <button type="button" className="btn btn-primary btn-primary-rock" onClick = {() => {rockBend(); setRandomPokemon();}}>Rock</button>
+        <button type="button" className="btn btn-primary btn-primary-ghost" onClick = {() => {ghostBend(); setRandomPokemon();}}>Ghost</button>
+        <button type="button" className="btn btn-primary btn-primary-dark" onClick = {() => {darkBend(); setRandomPokemon();}}>Dark</button>
+        <button type="button" className="btn btn-primary btn-primary-dragon" onClick = {() => {dragonBend(); setRandomPokemon();}}>Dragon</button>
+        <button type="button" className="btn btn-primary btn-primary-steel" onClick = {() => {steelBend(); setRandomPokemon();}}>Steel</button>
+        <button type="button" className="btn btn-primary btn-primary-fairy" onClick = {() => {fairyBend(); setRandomPokemon();}}>Fairy</button>
         </>
     )
 
