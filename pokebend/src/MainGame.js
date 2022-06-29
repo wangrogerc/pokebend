@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 export default function MainGame(){
     const [score, setScore] = useState(0)
-    const [randomNumber, setRandomNumber] = useState(1)
+    const [randomNumber, setRandomNumber] = useState(Math.floor(getRandomNumber(1,151)))
     const [currentPokemon, setCurrentPokemon] = useState()
     const [currentPokemonPic, setCurrentPokemonPic] = useState()
     const [currentPokemonTypes, setCurrentPokemonTypes] = useState([])
@@ -171,7 +171,7 @@ export default function MainGame(){
             console.log("bend inter")
             currentPokemonTypes.forEach((type) =>{
                 console.log(type.type.name);
-                if (type == "normal"){
+                if (type.type.name == "normal"){
                     console.log("plus normal")
                     setNormalAmmo(normalAmmo+1)
                 }
@@ -179,53 +179,54 @@ export default function MainGame(){
                     console.log("plus flames")
                     setFireAmmo(fireAmmo+1)
                 }
-                if (type == "water"){
+                if (type.type.name == "water"){
+                    console.log("plus wet")
                     setWaterAmmo(waterAmmo+1)
                 }
                 if (type.type.name == "grass"){
                     console.log("good grass")
                     setGrassAmmo(grassAmmo+1)
                 }
-                if (type == "electric"){
+                if (type.type.name == "electric"){
                     setElectricAmmo(electricAmmo+1)
                 }
-                if (type == "ice"){
+                if (type.type.name == "ice"){
                     setIceAmmo(iceAmmo+1)
                 }
-                if (type == "fighting"){
+                if (type.type.name == "fighting"){
                     setFightingAmmo(fightingAmmo+1)
                 }
-                if (type == "poison"){
+                if (type.type.name == "poison"){
                     setPoisonAmmo(poisonAmmo+1)
                 }
-                if (type == "ground"){
+                if (type.type.name == "ground"){
                     setGroundAmmo(groundAmmo+1)
                 }
-                if (type == "flying"){
+                if (type.type.name == "flying"){
                     setFlyingAmmo(flyingAmmo+1)
                 }
-                if (type == "psychic"){
+                if (type.type.name == "psychic"){
                     setPsychicAmmo(psychicAmmo+1)
                 }
-                if (type == "bug"){
+                if (type.type.name == "bug"){
                     setBugAmmo(bugAmmo+1)
                 }
-                if (type == "rock"){
+                if (type.type.name == "rock"){
                     setRockAmmo(rockAmmo+1)
                 }
-                if (type == "ghost"){
+                if (type.type.name == "ghost"){
                     setGhostAmmo(ghostAmmo+1)
                 }
-                if (type == "dark"){
+                if (type.type.name == "dark"){
                     setDarkAmmo(darkAmmo+1)
                 }
-                if (type == "dragon"){
+                if (type.type.name == "dragon"){
                     setDragonAmmo(dragonAmmo+1)
                 }
-                if (type == "steel"){
+                if (type.type.name == "steel"){
                     setSteelAmmo(steelAmmo+1)
                 }
-                if (type=="fairy"){
+                if (type.type.name =="fairy"){
                     setFairyAmmo(fairyAmmo+1)
                 }
             })
@@ -426,7 +427,7 @@ export default function MainGame(){
     }
 
     function TableGame(){
-        return <table class = "table table-sm">
+        if (ammoSystem == false){ return <table class = "table table-sm">
             <thead>
                 <tr>
                     <th scope = "col">Attack</th>
@@ -434,13 +435,70 @@ export default function MainGame(){
             </thead>
             <tbody>
                 <tr>
-                    <th><button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend();}}>Fighting</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-normal btn-lg btn-block" onClick = {() => {normalBend();}}>Normal</button></th> 
+                    <td><button type="button" className="btn btn-primary btn-primary-water btn-lg btn-block" onClick = {() => {waterBend();}}>Water</button></td>
+                    <th><button type="button" className="btn btn-primary btn-primary-fire btn-lg btn-block" onClick = {() => {fireBend();}}>Fire</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-grass btn-lg btn-block" onClick = {() => {grassBend();}}>Grass</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-electric btn-lg btn-block" onClick = {() => {electricBend();}}>Electric</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-ice btn-lg btn-block" onClick = {() => {iceBend();}}>Ice</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-fighting btn-lg btn-block" onClick = {() => {fightingBend();}}>Fighting</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-poison btn-lg btn-block" onClick = {() => {poisonBend();}}>Poison</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-ground btn-lg btn-block" onClick = {() => {groundBend();}}>Ground</button></th>
+                    
+
+
+                </tr>
+                <tr>
+                <th><button type="button" className="btn btn-primary btn-primary-flying btn-lg btn-block" onClick = {() => {flyingBend();}}>Flying</button> </th>
+                    <th><button type="button" className="btn btn-primary btn-primary-psychic btn-lg btn-block" onClick = {() => {psychicBend();}}>Psychic</button> </th>
+                    <th><button type="button" className="btn btn-primary btn-primary-bug btn-lg btn-block" onClick = {() => {bugBend();}}>Bug</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-rock btn-lg btn-block" onClick = {() => {rockBend();}}>Rock</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-ghost btn-lg btn-block" onClick = {() => {ghostBend();}}>Ghost</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-dark btn-lg btn-block" onClick = {() => {darkBend();}}>Dark</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-dragon btn-lg btn-block" onClick = {() => {dragonBend();}}>Dragon</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-steel btn-lg btn-block" onClick = {() => {steelBend();}}>Steel</button></th>
+                    <th><button type="button" className="btn btn-primary btn-primary-fairy btn-lg btn-block" onClick = {() => {fairyBend();}}>Fairy</button></th>
                 </tr>
             </tbody>
 
 
 
         </table>
+        
+    }
+    else{
+        return <table class = "table table-sm">
+        <thead>
+            <tr>
+                <th scope = "col">Att2ack</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><button type="button" className="btn btn-primary btn-primary-normal btn-lg btn-block" onClick = {() => {normalBend();}}>Normal</button> Ammo: {normalAmmo}</th> 
+                <td><button type="button" className="btn btn-primary btn-primary-water btn-lg btn-block" onClick = {() => {waterBend();}}>Water</button> <b>Ammo: {waterAmmo}</b></td>
+                <th><button type="button" className="btn btn-primary btn-primary-fire btn-lg btn-block" onClick = {() => {fireBend();}}>Fire</button>Ammo: {fireAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-grass btn-lg btn-block" onClick = {() => {grassBend();}}>Grass</button>Ammo: {grassAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-electric btn-lg btn-block" onClick = {() => {electricBend();}}>Electric</button> Ammo: {electricAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-ice btn-lg btn-block" onClick = {() => {iceBend();}}>Ice</button>Ammo: {iceAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-fighting btn-lg btn-block" onClick = {() => {fightingBend();}}>Fighting</button>Ammo: {fightingAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-poison btn-lg btn-block" onClick = {() => {poisonBend();}}>Poison</button>Ammo: {poisonAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-ground btn-lg btn-block" onClick = {() => {groundBend();}}>Ground</button>Ammo: {groundAmmo}</th>
+            </tr>
+            <tr>
+            <th><button type="button" className="btn btn-primary btn-primary-flying btn-lg btn-block" onClick = {() => {flyingBend();}}>Flying</button>Ammo: {flyingAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-psychic btn-lg btn-block" onClick = {() => {psychicBend();}}>Psychic</button>Ammo: {psychicAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-bug btn-lg btn-block" onClick = {() => {bugBend();}}>Bug</button>Ammo: {bugAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-rock btn-lg btn-block" onClick = {() => {rockBend();}}>Rock</button>Ammo: {rockAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-ghost btn-lg btn-block" onClick = {() => {ghostBend();}}>Ghost</button>Ammo: {ghostAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-dark btn-lg btn-block" onClick = {() => {darkBend();}}>Dark</button>Ammo: {darkAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-dragon btn-lg btn-block" onClick = {() => {dragonBend();}}>Dragon</button>Ammo: {dragonAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-steel btn-lg btn-block" onClick = {() => {steelBend();}}>Steel</button>Ammo: {steelAmmo}</th>
+                <th><button type="button" className="btn btn-primary btn-primary-fairy btn-lg btn-block" onClick = {() => {fairyBend();}}>Fairy</button>Ammo: {fairyAmmo}</th>
+            </tr>
+        </tbody>
+    </table>
+    }
     }
     //current problem: bend interaction executes before selected bend state is recognized
     //if we put bend interaction in useeffect when elementBend changes, the game won't recognize if we do an element twice in a row
@@ -457,7 +515,7 @@ export default function MainGame(){
         })}
         <img src = {currentPokemonPic}/>
         <TableGame />
-        <ul>
+        {/* <ul>
         <button type="button" className="btn btn-primary" onClick = {setRandomPokemon}>Reroll</button>
         <li><button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend();}}>Normal</button></li>
         <li><button type="button" className="btn btn-primary btn-primary-water" onClick = {() => {waterBend();}}>Water</button></li>
@@ -477,10 +535,10 @@ export default function MainGame(){
         <button type="button" className="btn btn-primary btn-primary-dragon" onClick = {() => {dragonBend();}}>Dragon</button> 
         <button type="button" className="btn btn-primary btn-primary-steel" onClick = {() => {steelBend();}}>Steel</button> 
         <button type="button" className="btn btn-primary btn-primary-fairy" onClick = {() => {fairyBend();}}>Fairy</button> 
-        </ul>
+        </ul> */}
         <AmmoList/>
-        <img src = "https://i.imgur.com/0lmGBa1.png"/>
-        <img src = "https://i.redd.it/zh41uur9deb71.jpg"/>
+        {/* <img src = "https://i.imgur.com/0lmGBa1.png"/>
+        <img src = "https://i.redd.it/zh41uur9deb71.jpg"/> */}
         </>
     )
 

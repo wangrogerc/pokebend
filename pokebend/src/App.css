@@ -26,6 +26,10 @@
   color: white;
 }
 
+body{
+  background-color: #DFDFDF
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -37,6 +41,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn-primary {
+  width: 100px
 }
 
 .btn-primary-normal{
