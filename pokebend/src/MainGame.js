@@ -110,6 +110,7 @@ export default function MainGame(){
     //     if (setElementBend in currentPokemonVulernabilities)
     // }
     function ToggleAmmoSystem(){
+        setRandomPokemon()
         if (ammoSystem == false){
             setScore(0)
             setAmmoSystem(true)
@@ -427,7 +428,7 @@ export default function MainGame(){
     }
 
     function TableGame(){
-        if (ammoSystem == false){ return <table class = "table table-sm table-fit">
+        if (ammoSystem == false){ return <table class = "table table-sm table-fit mx-auto w-auto text-center">
             <thead>
                 <tr>
                     <th scope = "col">Attack</th>
@@ -466,7 +467,7 @@ export default function MainGame(){
         
     }
     else{
-        return <table class = "table table-sm table-fit">
+        return <table class = "table table-sm table-fit mx-auto w-auto">
         <thead>
             <tr>
                 <th scope = "col">Attack</th>
@@ -505,7 +506,12 @@ export default function MainGame(){
     //if we put bend interaction in useeffect when elementBend changes, the game won't recognize if we do an element twice in a row
     return (
         <>
-        <h1 className = "centered">Score: {score}</h1>
+
+        <div className = "container-xxl bg-white shadow-sm p-3 mb-5 bg-white rounded">
+
+
+
+        <h1>Score: {score}</h1>
         
         {currentPokemonTypes?.map(currentPokemonType => {
             return (<>
@@ -514,35 +520,13 @@ export default function MainGame(){
                 </>
             )
         })}
-        <img src = {currentPokemonPic} className="rounded mx-auto d-block" alt="..." width="300" height="300"/>
+        <img src = {currentPokemonPic} className="rounded mx-auto d-block border " alt="..." width="300" height="300"/>
         <TableGame />
         <div>
-
-
-
-        <button type="button" className="btn btn-primary btn-sm rounded mx-auto d-block" onClick = {ToggleAmmoSystem}>Toggle Ammo System</button>
+            
         </div>
-        {/* <ul>
-        <button type="button" className="btn btn-primary" onClick = {setRandomPokemon}>Reroll</button>
-        <li><button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend();}}>Normal</button></li>
-        <li><button type="button" className="btn btn-primary btn-primary-water" onClick = {() => {waterBend();}}>Water</button></li>
-        <li><button type="button" className="btn btn-primary btn-primary-fire" onClick = {() => {fireBend();}}>Fire</button></li>
-        <li><button type="button" className="btn btn-primary btn-primary-grass" onClick = {() => {grassBend();}}>Grass</button></li>
-        <li><button type="button" className="btn btn-primary btn-primary-electric" onClick = {() => {electricBend();}}>Electric</button></li>
-        <li><button type="button" className="btn btn-primary btn-primary-ice" onClick = {() => {iceBend();}}>Ice</button></li>
-        <button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend();}}>Fighting</button> 
-        <button type="button" className="btn btn-primary btn-primary-poison" onClick = {() => {poisonBend();}}>Poison</button> 
-        <button type="button" className="btn btn-primary btn-primary-ground" onClick = {() => {groundBend();}}>Ground</button> 
-        <button type="button" className="btn btn-primary btn-primary-flying" onClick = {() => {flyingBend();}}>Flying</button> 
-        <button type="button" className="btn btn-primary btn-primary-psychic" onClick = {() => {psychicBend();}}>Psychic</button> 
-        <button type="button" className="btn btn-primary btn-primary-bug" onClick = {() => {bugBend();}}>Bug</button> 
-        <button type="button" className="btn btn-primary btn-primary-rock" onClick = {() => {rockBend();}}>Rock</button> 
-        <button type="button" className="btn btn-primary btn-primary-ghost" onClick = {() => {ghostBend();}}>Ghost</button> 
-        <button type="button" className="btn btn-primary btn-primary-dark" onClick = {() => {darkBend();}}>Dark</button> 
-        <button type="button" className="btn btn-primary btn-primary-dragon" onClick = {() => {dragonBend();}}>Dragon</button> 
-        <button type="button" className="btn btn-primary btn-primary-steel" onClick = {() => {steelBend();}}>Steel</button> 
-        <button type="button" className="btn btn-primary btn-primary-fairy" onClick = {() => {fairyBend();}}>Fairy</button> 
-        </ul> */}
+        </div>
+        <button type="button" className="btn btn-primary btn-sm rounded mx-auto d-block" onClick = {ToggleAmmoSystem}>Ammo Mode</button>
         {/* <AmmoList/> */}
         {/* <img src = "https://i.imgur.com/0lmGBa1.png"/>
         <img src = "https://i.redd.it/zh41uur9deb71.jpg"/> */}

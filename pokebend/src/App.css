@@ -136,3 +136,22 @@ table.table-fit thead th, table.table-fit tfoot th {
 table.table-fit tbody td, table.table-fit tfoot td {
   width: auto !important;
 }
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.true-center{
+  display: flex;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+}
+
+.navigation {
+	align-self: start;
+}
