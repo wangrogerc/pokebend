@@ -427,7 +427,7 @@ export default function MainGame(){
     }
 
     function TableGame(){
-        if (ammoSystem == false){ return <table class = "table table-sm">
+        if (ammoSystem == false){ return <table class = "table table-sm table-fit">
             <thead>
                 <tr>
                     <th scope = "col">Attack</th>
@@ -466,10 +466,10 @@ export default function MainGame(){
         
     }
     else{
-        return <table class = "table table-sm">
+        return <table class = "table table-sm table-fit">
         <thead>
             <tr>
-                <th scope = "col">Att2ack</th>
+                <th scope = "col">Attack</th>
             </tr>
         </thead>
         <tbody>
@@ -505,17 +505,23 @@ export default function MainGame(){
     //if we put bend interaction in useeffect when elementBend changes, the game won't recognize if we do an element twice in a row
     return (
         <>
-        <h1>Score: {score}</h1>
-        <button type="button" className="btn btn-primary" onClick = {ToggleAmmoSystem}>Toggle Ammo System</button>
+        <h1 className = "centered">Score: {score}</h1>
+        
         {currentPokemonTypes?.map(currentPokemonType => {
             return (<>
-                <div>{currentPokemonType.type.name}</div>
-                <div>weaknesses: {currentPokemonVulernabilities} </div>
+                {/* <div>{currentPokemonType.type.name}</div>
+                <div>weaknesses: {currentPokemonVulernabilities} </div> */}
                 </>
             )
         })}
-        <img src = {currentPokemonPic}/>
+        <img src = {currentPokemonPic} className="rounded mx-auto d-block" alt="..." width="300" height="300"/>
         <TableGame />
+        <div>
+
+
+
+        <button type="button" className="btn btn-primary btn-sm rounded mx-auto d-block" onClick = {ToggleAmmoSystem}>Toggle Ammo System</button>
+        </div>
         {/* <ul>
         <button type="button" className="btn btn-primary" onClick = {setRandomPokemon}>Reroll</button>
         <li><button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend();}}>Normal</button></li>
