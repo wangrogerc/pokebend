@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 export default function MainGame(){
+    const [score, setScore] = useState(0)
     const [randomNumber, setRandomNumber] = useState(1)
     const [currentPokemon, setCurrentPokemon] = useState()
     const [currentPokemonPic, setCurrentPokemonPic] = useState()
@@ -26,6 +27,8 @@ export default function MainGame(){
     const [dragonAmmo, setDragonAmmo] = useState(1)
     const [steelAmmo, setSteelAmmo] = useState(1)
     const [fairyAmmo, setFairyAmmo] = useState(1)
+    const [ammoSystem, setAmmoSystem] = useState(false)
+    let [currentlyBending, setCurrentlyBending] = useState(false)
     function getRandomNumber(min, max) {
         return Math.random() * (max - min) + min;
       }
@@ -48,6 +51,10 @@ export default function MainGame(){
     }, [randomNumber])
 
 
+    useEffect(()=>{
+        
+    }
+    )
     useEffect(()=>{
         if (currentPokemon != undefined){
             setCurrentPokemonPic(currentPokemon.sprites.front_default);
@@ -83,13 +90,15 @@ export default function MainGame(){
     }, [currentPokemonTypes])
 
     useEffect(()=> {
-        return bendInteraction()
+        return bendInteraction();
+        
 
         
     }, [elementBend]
     )
 
     function setRandomPokemon(){
+        
         const number = Math.floor(getRandomNumber(1,151))
         setRandomNumber(number)
         console.log(randomNumber)
@@ -100,12 +109,65 @@ export default function MainGame(){
     // function bend(){
     //     if (setElementBend in currentPokemonVulernabilities)
     // }
+    function ToggleAmmoSystem(){
+        if (ammoSystem == false){
+            setScore(0)
+            setAmmoSystem(true)
+            setNormalAmmo(1)
+            setFireAmmo(1)
+            setWaterAmmo(1)
+            setGrassAmmo(1)
+            setElectricAmmo(1)
+            setIceAmmo(1)
+            setFightingAmmo(1)
+            setPoisonAmmo(1)
+            setGroundAmmo(1)
+            setFlyingAmmo(1)
+            setPsychicAmmo(1)
+            setBugAmmo(1)
+            setRockAmmo(1)
+            setGhostAmmo(1)
+            setDarkAmmo(1)
+            setDragonAmmo(1)
+            setSteelAmmo(1)
+            setFairyAmmo(1)
+        }
+        else{
+            setScore(0)
+            setAmmoSystem(false)
+            setNormalAmmo(1)
+            setFireAmmo(1)
+            setWaterAmmo(1)
+            setGrassAmmo(1)
+            setElectricAmmo(1)
+            setIceAmmo(1)
+            setFightingAmmo(1)
+            setPoisonAmmo(1)
+            setGroundAmmo(1)
+            setFlyingAmmo(1)
+            setPsychicAmmo(1)
+            setBugAmmo(1)
+            setRockAmmo(1)
+            setGhostAmmo(1)
+            setDarkAmmo(1)
+            setDragonAmmo(1)
+            setSteelAmmo(1)
+            setFairyAmmo(1)
+        }
+    }
+    
+    while (currentlyBending){
+        bendInteraction()
+        currentlyBending = false
+    }
 
     function bendInteraction(){
         console.log(elementBend)
         console.log(currentPokemonVulernabilities)
         console.log(currentPokemonTypes)
-        if (currentPokemonVulernabilities.includes(elementBend)){
+        if (currentPokemonVulernabilities.includes(elementBend) && elementBend != "nothing"){
+            setScore(score+1)
+            
             console.log("bend inter")
             currentPokemonTypes.forEach((type) =>{
                 console.log(type.type.name);
@@ -167,145 +229,258 @@ export default function MainGame(){
                     setFairyAmmo(fairyAmmo+1)
                 }
             })
+            setElementBend("nothing")
             }
+        else if (elementBend == "nothing") {
+            
+        }
+        else{
+            console.log("lose")
+            setScore(0)
+        }
     }
 
     function normalBend(){
         if (normalAmmo > 0){
-            setNormalAmmo(normalAmmo-1)
+            if (ammoSystem){
+            setNormalAmmo(normalAmmo-1)}
             setElementBend("normal")
+            setRandomPokemon()
+            
         }
     }
     function fireBend(){
+        
         if (fireAmmo > 0){
-            setFireAmmo(fireAmmo-1)
+            if (ammoSystem){
+            setFireAmmo(fireAmmo-1)}
             setElementBend("fire")
+            setRandomPokemon()
+            
         }
     }
     function waterBend(){
         if (waterAmmo > 0){
-            setWaterAmmo(waterAmmo -1)
+            if (ammoSystem){
+            setWaterAmmo(waterAmmo -1)}
             setElementBend("water")
+            setRandomPokemon()
+            
         }
     }
     function grassBend(){
         if (grassAmmo > 0){
-            setGrassAmmo(grassAmmo-1)
+            if (ammoSystem){
+            setGrassAmmo(grassAmmo-1)}
             setElementBend("grass")
+            setRandomPokemon()
+            
         }
     }
     function electricBend(){
         if (electricAmmo > 0){
-            setElectricAmmo(electricAmmo -1)
+            if (ammoSystem){
+            setElectricAmmo(electricAmmo -1)}
             setElementBend("electric")
+            setRandomPokemon()
+            
         }
     }
     function iceBend(){
         if (iceAmmo > 0){
-            setIceAmmo(iceAmmo-1)
+            if (ammoSystem){
+            setIceAmmo(iceAmmo-1)}
             setElementBend("ice")
+            setRandomPokemon()
+            
         }
     }
     function fightingBend(){
         if (fightingAmmo > 0){
-            setFightingAmmo(fightingAmmo-1)
+            if (ammoSystem){
+            setFightingAmmo(fightingAmmo-1)}
             setElementBend("fighting")
+            setRandomPokemon()
+            
         }
     }
     function poisonBend(){
         if (poisonAmmo > 0){
-            setPoisonAmmo(poisonAmmo-1)
+            if (ammoSystem){
+            setPoisonAmmo(poisonAmmo-1)}
             setElementBend("poison")
+            setRandomPokemon()
         }
     }
     function groundBend(){
         if (groundAmmo > 0){
-            setGroundAmmo(groundAmmo-1)
+            if (ammoSystem){
+            setGroundAmmo(groundAmmo-1)}
             setElementBend("ground")
+            setRandomPokemon()
+            
         }
     }
     function flyingBend(){
         if (flyingAmmo > 0){
-        setFlyingAmmo(flyingAmmo-1)
-        setElementBend("flying")
+            if (ammoSystem){
+            setFlyingAmmo(flyingAmmo-1)}
+            setElementBend("flying")
+            setRandomPokemon()
+        
         }
     }
     function psychicBend(){
         if (psychicAmmo > 0){
-            setPsychicAmmo(psychicAmmo-1)
+            if (ammoSystem){
+            setPsychicAmmo(psychicAmmo-1)}
             setElementBend("psychic")
+            setRandomPokemon()
+            
         }
     }
     function bugBend(){
         if (bugAmmo > 0){
-            setBugAmmo(bugAmmo-1)
+            if (ammoSystem){
+            setBugAmmo(bugAmmo-1)}
             setElementBend("bug")
+            setRandomPokemon()
+            
         }        
     }
     function rockBend(){
-        if (rockBend > 0){
-            setRockAmmo(rockAmmo-1)
+        if (rockAmmo > 0){
+            if (ammoSystem){
+            setRockAmmo(rockAmmo-1)}
             setElementBend("rock")
+            setRandomPokemon()
+            
         }
     }
     function ghostBend(){
-        if (ghostBend > 0){
-            setGhostAmmo(ghostAmmo-1)
+        if (ghostAmmo > 0){
+            if (ammoSystem){
+            setGhostAmmo(ghostAmmo-1)}
             setElementBend("ghost")
+            setRandomPokemon()
+            
         }
     }
     function darkBend(){
-        if (darkBend > 0){
-            setDarkAmmo(darkAmmo-1)
+        if (darkAmmo > 0){
+            if (ammoSystem){
+            setDarkAmmo(darkAmmo-1)}
             setElementBend("dark")
+            setRandomPokemon()
+            
         }
     }
     function dragonBend(){
         if (dragonAmmo > 0){
-            setDragonAmmo(dragonAmmo-1)
+            if (ammoSystem){
+            setDragonAmmo(dragonAmmo-1)}
             setElementBend("dragon")
+            setRandomPokemon()
+            
         }
     }
     function steelBend(){
         if (steelAmmo > 0){
-            setSteelAmmo(darkAmmo-1)
+            if (ammoSystem){
+            setSteelAmmo(darkAmmo-1)}
             setElementBend("steel")
+            setRandomPokemon()
+            
         }
     }
     function fairyBend(){
         if (fairyAmmo > 0){
-            setFairyAmmo(fairyAmmo-1)
+            if (ammoSystem){
+            setFairyAmmo(fairyAmmo-1)}
             setElementBend("fairy")
+            setRandomPokemon()
+            
         }
     }
-    
+    function AmmoList(){
+    if (ammoSystem){ return <ul>
+            <li> Normal Ammo: {normalAmmo}</li>
+            <li>Water Ammo: {waterAmmo}</li>
+            <li>Fire Ammo: {fireAmmo}</li>
+            <li>Grass Ammo: {grassAmmo}</li>
+            <li> Electric Ammo: {electricAmmo}</li>
+            <li>Ice Ammo: {iceAmmo}</li>
+            <li>Fighting Ammo: {fightingAmmo}</li>
+            <li>Poison Ammo: {poisonAmmo}</li>
+            <li>Ground Ammo: {groundAmmo}</li>
+            <li>Flying Ammo: {flyingAmmo}</li>
+            <li>Psychic Ammo: {psychicAmmo}</li>
+            <li>Bug Ammo: {bugAmmo}</li>
+            <li>Rock Ammo: {rockAmmo}</li>
+            <li>Ghost Ammo: {ghostAmmo}</li>
+            <li>Dark Ammo: {darkAmmo}</li>
+            <li>Dragon Ammo: {dragonAmmo}</li>
+            <li>Steel Ammo: {steelAmmo}</li>
+            <li>Fairy Ammo: {fairyAmmo}</li>
+        </ul>}
+    }
+
+    function TableGame(){
+        return <table class = "table table-sm">
+            <thead>
+                <tr>
+                    <th scope = "col">Attack</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th><button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend();}}>Fighting</button></th>
+                </tr>
+            </tbody>
+
+
+
+        </table>
+    }
+    //current problem: bend interaction executes before selected bend state is recognized
+    //if we put bend interaction in useeffect when elementBend changes, the game won't recognize if we do an element twice in a row
     return (
         <>
+        <h1>Score: {score}</h1>
+        <button type="button" className="btn btn-primary" onClick = {ToggleAmmoSystem}>Toggle Ammo System</button>
         {currentPokemonTypes?.map(currentPokemonType => {
-            return (
+            return (<>
                 <div>{currentPokemonType.type.name}</div>
+                <div>weaknesses: {currentPokemonVulernabilities} </div>
+                </>
             )
         })}
         <img src = {currentPokemonPic}/>
+        <TableGame />
+        <ul>
         <button type="button" className="btn btn-primary" onClick = {setRandomPokemon}>Reroll</button>
-        <button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend(); setRandomPokemon()}}>Normal</button> Normal Ammo: {normalAmmo}
-        <button type="button" className="btn btn-primary btn-primary-water" onClick = {() => {waterBend(); setRandomPokemon()}}>Water</button> Water Ammo: {waterAmmo}
-        <button type="button" className="btn btn-primary btn-primary-fire" onClick = {() => {fireBend(); setRandomPokemon();}}>Fire</button> Fire Ammo: {fireAmmo}
-        <button type="button" className="btn btn-primary btn-primary-grass" onClick = {() => {grassBend(); setRandomPokemon();}}>Grass</button> Grass Ammo: {grassAmmo}
-        <button type="button" className="btn btn-primary btn-primary-electric" onClick = {() => {electricBend(); setRandomPokemon();}}>Electric</button> Electric Ammo: {electricAmmo}
-        <button type="button" className="btn btn-primary btn-primary-ice" onClick = {() => {iceBend(); setRandomPokemon();}}>Ice</button> Ice Ammo: {iceAmmo}
-        <button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend(); setRandomPokemon();}}>Fighting</button> Fighting Ammo: {fightingAmmo}
-        <button type="button" className="btn btn-primary btn-primary-poison" onClick = {() => {poisonBend(); setRandomPokemon();}}>Poison</button> Poison Ammo: {poisonAmmo}
-        <button type="button" className="btn btn-primary btn-primary-ground" onClick = {() => {groundBend(); setRandomPokemon();}}>Ground</button> Ground Ammo: {groundAmmo}
-        <button type="button" className="btn btn-primary btn-primary-flying" onClick = {() => {flyingBend(); setRandomPokemon();}}>Flying</button> Flying Ammo: {flyingAmmo}
-        <button type="button" className="btn btn-primary btn-primary-psychic" onClick = {() => {psychicBend(); setRandomPokemon();}}>Psychic</button> Psychic Ammo: {psychicAmmo}
-        <button type="button" className="btn btn-primary btn-primary-bug" onClick = {() => {bugBend(); setRandomPokemon();}}>Bug</button> Bug Ammo: {bugAmmo}
-        <button type="button" className="btn btn-primary btn-primary-rock" onClick = {() => {rockBend(); setRandomPokemon();}}>Rock</button> Rock Ammo: {rockAmmo}
-        <button type="button" className="btn btn-primary btn-primary-ghost" onClick = {() => {ghostBend(); setRandomPokemon();}}>Ghost</button> Ghost Ammo: {ghostAmmo}
-        <button type="button" className="btn btn-primary btn-primary-dark" onClick = {() => {darkBend(); setRandomPokemon();}}>Dark</button> Dark Ammo: {darkAmmo}
-        <button type="button" className="btn btn-primary btn-primary-dragon" onClick = {() => {dragonBend(); setRandomPokemon();}}>Dragon</button> Dragon Ammo: {dragonAmmo}
-        <button type="button" className="btn btn-primary btn-primary-steel" onClick = {() => {steelBend(); setRandomPokemon();}}>Steel</button> Steel Ammo: {steelAmmo}
-        <button type="button" className="btn btn-primary btn-primary-fairy" onClick = {() => {fairyBend(); setRandomPokemon();}}>Fairy</button> Fairy Ammo: {fairyAmmo}
+        <li><button type="button" className="btn btn-primary btn-primary-normal" onClick = {() => {normalBend();}}>Normal</button></li>
+        <li><button type="button" className="btn btn-primary btn-primary-water" onClick = {() => {waterBend();}}>Water</button></li>
+        <li><button type="button" className="btn btn-primary btn-primary-fire" onClick = {() => {fireBend();}}>Fire</button></li>
+        <li><button type="button" className="btn btn-primary btn-primary-grass" onClick = {() => {grassBend();}}>Grass</button></li>
+        <li><button type="button" className="btn btn-primary btn-primary-electric" onClick = {() => {electricBend();}}>Electric</button></li>
+        <li><button type="button" className="btn btn-primary btn-primary-ice" onClick = {() => {iceBend();}}>Ice</button></li>
+        <button type="button" className="btn btn-primary btn-primary-fighting" onClick = {() => {fightingBend();}}>Fighting</button> 
+        <button type="button" className="btn btn-primary btn-primary-poison" onClick = {() => {poisonBend();}}>Poison</button> 
+        <button type="button" className="btn btn-primary btn-primary-ground" onClick = {() => {groundBend();}}>Ground</button> 
+        <button type="button" className="btn btn-primary btn-primary-flying" onClick = {() => {flyingBend();}}>Flying</button> 
+        <button type="button" className="btn btn-primary btn-primary-psychic" onClick = {() => {psychicBend();}}>Psychic</button> 
+        <button type="button" className="btn btn-primary btn-primary-bug" onClick = {() => {bugBend();}}>Bug</button> 
+        <button type="button" className="btn btn-primary btn-primary-rock" onClick = {() => {rockBend();}}>Rock</button> 
+        <button type="button" className="btn btn-primary btn-primary-ghost" onClick = {() => {ghostBend();}}>Ghost</button> 
+        <button type="button" className="btn btn-primary btn-primary-dark" onClick = {() => {darkBend();}}>Dark</button> 
+        <button type="button" className="btn btn-primary btn-primary-dragon" onClick = {() => {dragonBend();}}>Dragon</button> 
+        <button type="button" className="btn btn-primary btn-primary-steel" onClick = {() => {steelBend();}}>Steel</button> 
+        <button type="button" className="btn btn-primary btn-primary-fairy" onClick = {() => {fairyBend();}}>Fairy</button> 
+        </ul>
+        <AmmoList/>
+        <img src = "https://i.imgur.com/0lmGBa1.png"/>
+        <img src = "https://i.redd.it/zh41uur9deb71.jpg"/>
         </>
     )
 
