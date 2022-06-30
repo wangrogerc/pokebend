@@ -155,3 +155,7 @@ table.table-fit tbody td, table.table-fit tfoot td {
 .navigation {
 	align-self: start;
 }
+
+.mt-10 {
+  margin-top: 10 !important;
+}

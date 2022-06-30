@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useSyncExternalStore} from "react";
 
 export default function MainGame(){
     const [score, setScore] = useState(0)
@@ -28,7 +28,8 @@ export default function MainGame(){
     const [steelAmmo, setSteelAmmo] = useState(1)
     const [fairyAmmo, setFairyAmmo] = useState(1)
     const [ammoSystem, setAmmoSystem] = useState(false)
-    let [currentlyBending, setCurrentlyBending] = useState(false)
+
+    let [lost, setLost] = useState(false)
     function getRandomNumber(min, max) {
         return Math.random() * (max - min) + min;
       }
@@ -36,18 +37,7 @@ export default function MainGame(){
     useEffect(() => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`)
         .then(response => response.json())
-        .then(response => setCurrentPokemon(response));
-        
-        
-        // .then(response => setCurrentPokemonPic(response.sprites.front_default))
-        // .then(response => console.log(response))
-        // .catch(e => console.error(e));
-        // fetch(`https://pokeapi.co/api/v2/pokemon/${currentPokemon}`)
-        // .then(response => response.json())
-        // .then(response => setCurrentPokemonTypes(response.types))
-        // .catch(e => console.error(e));
-        
-        
+        .then(response => setCurrentPokemon(response));    
     }, [randomNumber])
 
 
@@ -60,7 +50,6 @@ export default function MainGame(){
             setCurrentPokemonPic(currentPokemon.sprites.front_default);
             setCurrentPokemonTypes(currentPokemon.types) 
             if(elementBend != undefined){
-
             }
         }
 
@@ -71,29 +60,20 @@ export default function MainGame(){
         currentPokemonTypes.map((type) =>
             fetch(`https://pokeapi.co/api/v2/type/${type.type.name}`)
                 .then(response => response.json()))
-                // .then(data => {console.log(data); return data})
-                // .then(data => data.damage_relations.double_damage_from)
         )
     }
 
 
     useEffect(()=> {
-        // const arrayOfArraysOfObjects = []
         getWeaknesses()
             .then(data =>
                 data.flatMap(type => type.damage_relations.double_damage_from)
                     .map(weakness => weakness.name))
             .then(setCurrentPokemonVulnerabilities);
-            
-    
-        
     }, [currentPokemonTypes])
 
     useEffect(()=> {
         return bendInteraction();
-        
-
-        
     }, [elementBend]
     )
 
@@ -157,10 +137,10 @@ export default function MainGame(){
         }
     }
     
-    while (currentlyBending){
-        bendInteraction()
-        currentlyBending = false
-    }
+    // while (currentlyBending){
+    //     bendInteraction()
+    //     currentlyBending = false
+    // }
 
     function bendInteraction(){
         console.log(elementBend)
@@ -183,6 +163,7 @@ export default function MainGame(){
                 if (type.type.name == "water"){
                     console.log("plus wet")
                     setWaterAmmo(waterAmmo+1)
+                    
                 }
                 if (type.type.name == "grass"){
                     console.log("good grass")
@@ -236,19 +217,21 @@ export default function MainGame(){
         else if (elementBend == "nothing") {
             
         }
+
         else{
+            setElementBend("nothing")
             console.log("lose")
             setScore(0)
         }
     }
+
 
     function normalBend(){
         if (normalAmmo > 0){
             if (ammoSystem){
             setNormalAmmo(normalAmmo-1)}
             setElementBend("normal")
-            setRandomPokemon()
-            
+            setRandomPokemon()    
         }
     }
     function fireBend(){
@@ -258,7 +241,6 @@ export default function MainGame(){
             setFireAmmo(fireAmmo-1)}
             setElementBend("fire")
             setRandomPokemon()
-            
         }
     }
     function waterBend(){
@@ -267,7 +249,6 @@ export default function MainGame(){
             setWaterAmmo(waterAmmo -1)}
             setElementBend("water")
             setRandomPokemon()
-            
         }
     }
     function grassBend(){
@@ -276,7 +257,6 @@ export default function MainGame(){
             setGrassAmmo(grassAmmo-1)}
             setElementBend("grass")
             setRandomPokemon()
-            
         }
     }
     function electricBend(){
@@ -285,7 +265,6 @@ export default function MainGame(){
             setElectricAmmo(electricAmmo -1)}
             setElementBend("electric")
             setRandomPokemon()
-            
         }
     }
     function iceBend(){
@@ -294,7 +273,6 @@ export default function MainGame(){
             setIceAmmo(iceAmmo-1)}
             setElementBend("ice")
             setRandomPokemon()
-            
         }
     }
     function fightingBend(){
@@ -303,7 +281,6 @@ export default function MainGame(){
             setFightingAmmo(fightingAmmo-1)}
             setElementBend("fighting")
             setRandomPokemon()
-            
         }
     }
     function poisonBend(){
@@ -320,7 +297,6 @@ export default function MainGame(){
             setGroundAmmo(groundAmmo-1)}
             setElementBend("ground")
             setRandomPokemon()
-            
         }
     }
     function flyingBend(){
@@ -329,7 +305,6 @@ export default function MainGame(){
             setFlyingAmmo(flyingAmmo-1)}
             setElementBend("flying")
             setRandomPokemon()
-        
         }
     }
     function psychicBend(){
@@ -338,7 +313,6 @@ export default function MainGame(){
             setPsychicAmmo(psychicAmmo-1)}
             setElementBend("psychic")
             setRandomPokemon()
-            
         }
     }
     function bugBend(){
@@ -347,7 +321,6 @@ export default function MainGame(){
             setBugAmmo(bugAmmo-1)}
             setElementBend("bug")
             setRandomPokemon()
-            
         }        
     }
     function rockBend(){
@@ -356,7 +329,6 @@ export default function MainGame(){
             setRockAmmo(rockAmmo-1)}
             setElementBend("rock")
             setRandomPokemon()
-            
         }
     }
     function ghostBend(){
@@ -365,7 +337,6 @@ export default function MainGame(){
             setGhostAmmo(ghostAmmo-1)}
             setElementBend("ghost")
             setRandomPokemon()
-            
         }
     }
     function darkBend(){
@@ -374,7 +345,6 @@ export default function MainGame(){
             setDarkAmmo(darkAmmo-1)}
             setElementBend("dark")
             setRandomPokemon()
-            
         }
     }
     function dragonBend(){
@@ -383,7 +353,6 @@ export default function MainGame(){
             setDragonAmmo(dragonAmmo-1)}
             setElementBend("dragon")
             setRandomPokemon()
-            
         }
     }
     function steelBend(){
@@ -392,7 +361,6 @@ export default function MainGame(){
             setSteelAmmo(darkAmmo-1)}
             setElementBend("steel")
             setRandomPokemon()
-            
         }
     }
     function fairyBend(){
@@ -401,7 +369,6 @@ export default function MainGame(){
             setFairyAmmo(fairyAmmo-1)}
             setElementBend("fairy")
             setRandomPokemon()
-            
         }
     }
     function AmmoList(){
@@ -502,12 +469,23 @@ export default function MainGame(){
     </table>
     }
     }
+
     //current problem: bend interaction executes before selected bend state is recognized
     //if we put bend interaction in useeffect when elementBend changes, the game won't recognize if we do an element twice in a row
     return (
         <>
-
-        <div className = "container-xxl bg-white shadow-sm p-3 mb-5 bg-white rounded">
+        
+        <div className = "mt-5">
+        <div hidden>1</div>
+        </div>
+        <div className = "mt-5">
+        <div hidden>2</div>
+        </div>
+        <div className = "mt-5">
+        <div hidden>1</div>
+        </div>
+        <div className = "d-flex justify-content-center"></div>
+        <div className = "container-xxl bg-white shadow-sm p-3 mb-5 bg-white rounded mt-5">
 
 
 
