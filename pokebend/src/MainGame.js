@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useSyncExternalStore} from "react";
-
+import gitlogo from './github.png'
 export default function MainGame(){
     const [score, setScore] = useState(0)
     const [randomNumber, setRandomNumber] = useState(Math.floor(getRandomNumber(1,151)))
@@ -498,6 +498,8 @@ export default function MainGame(){
                 </>
             )
         })}
+        <a href = "https://github.com/wangrogerc/pokebend">
+        <img src ={gitlogo} className = "mx-auto git"/></a>
         <img src = {currentPokemonPic} className="rounded mx-auto d-block border " alt="..." width="300" height="300"/>
         <TableGame />
         <div>
@@ -505,6 +507,7 @@ export default function MainGame(){
         </div>
         </div>
         <button type="button" className="btn btn-primary btn-sm rounded mx-auto d-block" onClick = {ToggleAmmoSystem}>Ammo Mode</button>
+        
         {/* <AmmoList/> */}
         {/* <img src = "https://i.imgur.com/0lmGBa1.png"/>
         <img src = "https://i.redd.it/zh41uur9deb71.jpg"/> */}

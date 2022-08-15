@@ -159,3 +159,8 @@ table.table-fit tbody td, table.table-fit tfoot td {
 .mt-10 {
   margin-top: 10 !important;
 }
+
+.git {
+  width: 100px;
+  height: 40px;
+}
